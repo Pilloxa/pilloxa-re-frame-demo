@@ -9,7 +9,8 @@
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.10.339"]
                  [reagent  "0.8.1"]
-                 [re-frame "0.10.7"]]
+                 [re-frame "0.10.7"]
+                 [cljsjs/react-chartjs-2 "2.7.4-0"]]
 
   :source-paths ["src"]
 

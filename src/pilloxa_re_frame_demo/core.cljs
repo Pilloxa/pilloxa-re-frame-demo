@@ -19,12 +19,7 @@
                         :label "Test data"}]}}]])
 
 (defn app-root []
-  [:div {:style {:display         :flex
-                 :justify-content :space-around
-                 :padding-top     50}}
-   [:div {:style {:display     :flex
-                  :align-items :center}}
-    [dose-chart]]])
+  [dose-chart])
 
 (defn main []
   (reagent/render [app-root] (js/document.getElementById "app")))

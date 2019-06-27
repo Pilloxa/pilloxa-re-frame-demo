@@ -49,28 +49,36 @@
 
 (defn patient-selector [{:keys [id color selected?]}]
   [:div {:style {:display        :flex
-                 :flex-direction :row}}
-   [:input {:type     :checkbox
+                 :flex-direction :row
+                 :align-items    :center
+                 :margin-top     8}}
+   [:div {:style {:width            8
+                  :height           30
+                  :background-color color}}]
+   [:input {:style    {:margin 5}
+            :type     :checkbox
             :checked  selected?
             :onChange #(dispatch [:toggle-select id])}]
-   [:div {:style {:width            20
-                  :height           20
-                  :background-color color}}]
-   [:div id]])
+   [:div {:style {:font-family "Arial"
+                  :font-weight :lighter}}
+    id]])
 
 (defn patient-selectors []
   (let [patients (subscribe [:patients])]
-    [:div {:style {:display        :flex
-                   :flex-direction :column}}
-     (for [patient @patients]
-       ^{:key (:id patient)}
-       [patient-selector patient])]))
+    [:div {:style {:display         :flex
+                   :flex-direction  :column
+                   :justify-content :space-around
+                   :margin-right    50}}
+     [:div {:style {:display        :flex
+                    :flex-direction :column}}
+      (for [patient @patients]
+        ^{:key (:id patient)}
+        [patient-selector patient])]]))
 
 (defn dose-chart []
   (let [date-range        (subscribe [:date-range])
         selected-patients (subscribe [:selected-patients])]
-    [:div {:style {:width  400
-                   :height 300}}
+    [:div {:style {:width 500}}
      [line-chart
       {:legend {:display false}
        :data   {:labels   @date-range
@@ -83,14 +91,13 @@
                              :data            dose-history})}}]]))
 
 (defn app-root []
-  (let []
-    [:div {:style {:display         :flex
-                   :flex            1
-                   :justify-content :space-around
-                   :padding-top     50}}
-     [:div {:style {:display :flex}}
-      [patient-selectors]
-      [dose-chart]]]))
+  [:div {:style {:display         :flex
+                 :justify-content :space-around
+                 :padding-top     50}}
+   [:div {:style {:display     :flex
+                  :align-items :center}}
+    [patient-selectors]
+    [dose-chart]]])
 
 (defonce reload-cnt
   (atom 0))

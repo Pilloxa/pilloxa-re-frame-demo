@@ -12,7 +12,7 @@
                  [re-frame "0.10.7"]
                  [cljsjs/react-chartjs-2 "2.7.4-0"]]
 
-  :source-paths ["src"]
+  :source-paths ["src" "script"]
 
   :aliases {"fig"       ["trampoline" "run" "-m" "figwheel.main"]
             "fig:build" ["trampoline" "run" "-m" "figwheel.main" "-b" "dev" "-r"]

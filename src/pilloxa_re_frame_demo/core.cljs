@@ -10,7 +10,7 @@
 (def line-chart
   (reagent/adapt-react-class js/ReactChartjs2.Line))
 
-(def initial-state
+(def app-db
   {:date-range ["2019-06-01" "2019-06-02" "2019-06-03" "2019-06-04"]
    :patients   {:patient-1 {:id           :patient-1
                             :dose-history [(rand-int 100) (rand-int 100) (rand-int 100) (rand-int 100)]
@@ -24,7 +24,7 @@
 (reg-event-db
   :initialize
   (fn [_ _]
-    initial-state))
+    app-db))
 
 (reg-event-db
   :toggle-select
@@ -47,7 +47,9 @@
   (fn [db _]
     (:date-range db)))
 
-(defn patient-selector [{:keys [id color selected?]}]
+(defn patient-selector
+  "Component selects a single patient"
+  [{:keys [id color selected?]}]
   [:div {:style {:display        :flex
                  :flex-direction :row
                  :align-items    :center
@@ -63,7 +65,9 @@
                   :font-weight :lighter}}
     id]])
 
-(defn patient-selectors []
+(defn patient-selectors
+  "Component that selects patients"
+  []
   (let [patients (subscribe [:patients])]
     [:div {:style {:display         :flex
                    :flex-direction  :column
@@ -75,7 +79,9 @@
         ^{:key (:id patient)}
         [patient-selector patient])]]))
 
-(defn dose-chart []
+(defn dose-chart
+  "Chart showing the doses"
+  []
   (let [date-range        (subscribe [:date-range])
         selected-patients (subscribe [:selected-patients])]
     [:div {:style {:width 500}}
@@ -101,6 +107,7 @@
 
 (defonce reload-cnt
   (atom 0))
+
 
 (defn main []
   (when (zero? @reload-cnt)

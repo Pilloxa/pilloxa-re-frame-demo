@@ -1,6 +1,8 @@
 # pilloxa-re-frame-demo
 
-FIXME: Write a one-line description of your library/project.
+Demo project for re-frame and figwheel.
+
+Reagent version is on branch [reagent](https://github.com/Pilloxa/pilloxa-re-frame-demo/tree/reagent)
 
 ## Overview
 
@@ -32,6 +34,6 @@ To create a production build run:
 
 ## License
 
-Copyright © 2018 FIXME
+Copyright © 2018 Pilloxa
 
 Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
